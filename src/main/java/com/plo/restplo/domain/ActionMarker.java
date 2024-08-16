@@ -1,14 +1,6 @@
 package com.plo.restplo.domain;
 
-public class ActionMarker implements Unit {
-    private final Color color;
+public record ActionMarker(Color color) implements Unit {
+    public final static int limit = 5;
 
-    public ActionMarker(Color color) {
-        this.color = color;
-    }
-
-    @Override
-    public Color getColor() {
-        return color;
-    }
 }

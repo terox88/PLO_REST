@@ -7,9 +7,9 @@ import java.util.Queue;
 @NoArgsConstructor
 @Getter
 public class HeroCard {
-    private User user;
+    private Player player;
     private Hero hero;
-    private Abilities abilities;
+    private Abilities UnitsAbilities;
     private Queue<InfluenceMarker> influenceMarkers;
     private Queue<ActionMarker> actionMarkers;
     private int unitLevelOne;
@@ -23,8 +23,8 @@ public class HeroCard {
     private int manaLevelThree;
     private int vukoTokens;
 
-    public HeroCard(User user, Hero hero) {
-        this.user = user;
+    public HeroCard(Player player, Hero hero) {
+        this.player = player;
         this.hero = hero;
     }
 

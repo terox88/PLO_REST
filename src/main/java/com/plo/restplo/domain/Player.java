@@ -1,10 +1,13 @@
 package com.plo.restplo.domain;
 
-public class User {
+public class Player {
     private String name;
     private String email;
+    private int winningPoints;
+    private int reputation;
+    private boolean hasFinishedGoal;
 
-    public User(String name, String email) {
+    public Player(String name, String email) {
         this.name = name;
         this.email = email;
     }
