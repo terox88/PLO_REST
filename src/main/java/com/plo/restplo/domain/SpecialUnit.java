@@ -2,17 +2,16 @@ package com.plo.restplo.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+
 @Getter
-@NoArgsConstructor
-public class SpecialUnit implements Unit{
-    private String name;
-    private Color color;
-    private int level;
-    List<AbilitiesType> getAbilities(){
-        return new ArrayList<>();
-    }
+@RequiredArgsConstructor
+public class SpecialUnit {
+    private final String name;
+    private final Color color;
+    private final int level;
+   private boolean isKilled;
+
 
 }

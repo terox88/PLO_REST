@@ -1,31 +1,20 @@
 package com.plo.restplo.domain;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Abilities {
-    private final int levelOneMaxSize;
-    private final int levelTwoMaxSize;
-    private final int levelThreeMaxSize;
+    private final int levelOneMaxSize = 2;
+    private final int levelTwoMaxSize = 3;
+    private final int levelThreeMaxSize = 4;
     private final List<AbilitiesType> levOneAbilitiesTypes = new ArrayList<>();
     private final List<AbilitiesType> levTwoAbilitiesTypes = new ArrayList<>();
     private final List<AbilitiesType> LevThreeAbilitiesTypes = new ArrayList<>();
 
-    public Abilities(int levelOneMaxSize, int levelTwoMaxSize, int levelThreeMaxSize) {
-        this.levelOneMaxSize = levelOneMaxSize;
-        this.levelTwoMaxSize = levelTwoMaxSize;
-        this.levelThreeMaxSize = levelThreeMaxSize;
-    }
 
-    public List<AbilitiesType> getLevOneAbilitiesTypes() {
-        return levOneAbilitiesTypes;
-    }
-
-    public List<AbilitiesType> getLevTwoAbilitiesTypes() {
-        return levTwoAbilitiesTypes;
-    }
-
-    public List<AbilitiesType> getLevThreeAbilitiesTypes() {
-        return LevThreeAbilitiesTypes;
-    }
 }

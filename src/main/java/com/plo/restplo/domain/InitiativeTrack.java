@@ -1,9 +1,14 @@
 package com.plo.restplo.domain;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+@RequiredArgsConstructor
+@Getter
 public class InitiativeTrack {
-    private List<Stage> stages;
-    Board board;
+    private final List<Stage> stages;
+   private final Board board;
 
 }

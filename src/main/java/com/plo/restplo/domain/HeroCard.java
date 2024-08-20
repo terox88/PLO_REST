@@ -2,16 +2,19 @@ package com.plo.restplo.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.Queue;
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
+@Setter
 public class HeroCard {
-    private Player player;
-    private Hero hero;
-    private Abilities UnitsAbilities;
-    private Queue<InfluenceMarker> influenceMarkers;
-    private Queue<ActionMarker> actionMarkers;
+    private final Player player;
+    private final Hero hero;
+    private final Abilities UnitsAbilities;
+    private final Queue<InfluenceMarker> influenceMarkers;
+    private final Queue<ActionMarker> actionMarkers;
     private int unitLevelOne;
     private int unitLevelTwo;
     private int unitLevelThree;
@@ -23,10 +26,6 @@ public class HeroCard {
     private int manaLevelThree;
     private int vukoTokens;
 
-    public HeroCard(Player player, Hero hero) {
-        this.player = player;
-        this.hero = hero;
-    }
 
     public void setUnitLevelOne(int unitLevelOne) {
         this.unitLevelOne = unitLevelOne;
