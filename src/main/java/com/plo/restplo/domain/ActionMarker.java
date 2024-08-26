@@ -1,12 +1,26 @@
 package com.plo.restplo.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
-@RequiredArgsConstructor
+
+@NoArgsConstructor
 @Getter
+@Entity
+@DynamicUpdate
 public class ActionMarker {
-    private final Color color;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
+    private long id;
+    private Color color;
     public final static int limit = 5;
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "ACTION_FIELD_ID")
+    private ActionField actionField;
 
 }

@@ -16,7 +16,15 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private long id;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "VIPER_GORGE_ID")
     private  ViperGorge viperGorge;
+    @OneToMany(
+            targetEntity = ActionField.class,
+            mappedBy = "board",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private  List<ActionField> actionFields;
     private  List<Land> lands;
     private  List<HeroCard> heroCards;
