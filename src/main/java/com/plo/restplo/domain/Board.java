@@ -26,6 +26,12 @@ public class Board {
             fetch = FetchType.LAZY
     )
     private  List<ActionField> actionFields;
+    @OneToMany(
+            targetEntity = Land.class,
+            mappedBy = "board",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private  List<Land> lands;
     private  List<HeroCard> heroCards;
     private  InitiativeTrack initiativeTrack;

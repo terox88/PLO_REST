@@ -22,5 +22,8 @@ public class ActionMarker {
     @ManyToOne
     @JoinColumn(name = "ACTION_FIELD_ID")
     private ActionField actionField;
+    @ManyToOne
+    @JoinColumn(name = "VIPER_GORGE_ID")
+    private ViperGorge viperGorge;
 
 }
