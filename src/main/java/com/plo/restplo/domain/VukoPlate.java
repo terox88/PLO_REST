@@ -1,11 +1,21 @@
 package com.plo.restplo.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Entity
 public class VukoPlate {
-    private final VukoPlateType vukoPlateType;
-    private final boolean isAllGame;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
+    private long id;
+    private VukoPlateType vukoPlateType;
+    private boolean isAllGame;
 
+    public VukoPlate(VukoPlateType vukoPlateType, boolean isAllGame) {
+        this.vukoPlateType = vukoPlateType;
+        this.isAllGame = isAllGame;
+    }
 }

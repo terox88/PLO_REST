@@ -1,14 +1,32 @@
 package com.plo.restplo.domain;
 
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
 import java.util.List;
-@RequiredArgsConstructor
-@Getter
-public class InitiativeTrack {
-    private final List<Stage> stages;
-   private final Board board;
 
+@Getter
+@NoArgsConstructor
+@EqualsAndHashCode
+@Entity
+@DynamicUpdate
+public class InitiativeTrack {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
+    private long id;
+    @OneToMany(
+            targetEntity = InitiativeTrack.class,
+            mappedBy = "initiativeTrack",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private  List<Stage> stages;
+
+    public InitiativeTrack(List<Stage> stages) {
+        this.stages = stages;
+    }
 }

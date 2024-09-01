@@ -1,16 +1,16 @@
 package com.plo.restplo.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 @Entity
+@DynamicUpdate
 public class Uroczysko {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

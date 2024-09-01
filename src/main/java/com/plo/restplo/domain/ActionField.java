@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@DynamicUpdate
 public class ActionField {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,4 +32,9 @@ public class ActionField {
     @JoinColumn(name = "BOARD_ID")
     private  Board board;
 
+    public ActionField(ActionFieldType actionFieldType, int maxTrackSize, Board board) {
+        this.actionFieldType = actionFieldType;
+        this.maxTrackSize = maxTrackSize;
+        this.board = board;
+    }
 }

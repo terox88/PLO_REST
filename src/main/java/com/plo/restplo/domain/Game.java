@@ -7,8 +7,8 @@ import lombok.*;
 import java.util.List;
 @Entity(name = "GAMES")
 @Getter
-@Setter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,16 +24,17 @@ public class Game {
             inverseJoinColumns = {@JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")}
     )
     private List<Player> players;
+    @Setter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ACTIVE_PLAYER_ID")
     private Player activePlayer;
+    @Setter
     private boolean isEnded;
+    @Setter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "WINNER_PLAYER_ID")
     private Player winner;
 
-    public Game() {
-    }
 
     public Game(Board board, List<Player> players) {
         this.board = board;

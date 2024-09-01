@@ -1,69 +1,75 @@
 package com.plo.restplo.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Queue;
-@RequiredArgsConstructor
+
 @Getter
-@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@Entity
+@DynamicUpdate
 public class HeroCard {
-    private final Player player;
-    private final Hero hero;
-    private final Abilities UnitsAbilities;
-    private final Queue<InfluenceMarker> influenceMarkers;
-    private final Queue<ActionMarker> actionMarkers;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
+    private long id;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "PLAYER_ID")
+    private  Player player;
+    private  Hero hero;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ABILITIES_ID")
+    private  Abilities unitsAbilities;
+    @OneToMany(
+            targetEntity = InfluenceMarker.class,
+            mappedBy = "heroCard",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private  Queue<InfluenceMarker> influenceMarkers;
+    @OneToMany(
+            targetEntity = ActionMarker.class,
+            mappedBy = "heroCard",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private  Queue<ActionMarker> actionMarkers;
+    @Setter
     private int unitLevelOne;
+    @Setter
     private int unitLevelTwo;
+    @Setter
     private int unitLevelThree;
+    @Setter
     private int gold;
+    @Setter
     private int population;
+    @Setter
     private int manaLevelZero;
+    @Setter
     private int manaLevelOne;
+    @Setter
     private int manaLevelTwo;
+    @Setter
     private int manaLevelThree;
+    @Setter
     private int vukoTokens;
 
 
-    public void setUnitLevelOne(int unitLevelOne) {
+    public HeroCard(Player player, Hero hero, Abilities unitsAbilities, Queue<InfluenceMarker> influenceMarkers, Queue<ActionMarker> actionMarkers, int unitLevelOne, int unitLevelTwo, int unitLevelThree, int gold, int population, int manaLevelZero) {
+        this.player = player;
+        this.hero = hero;
+        this.unitsAbilities = unitsAbilities;
+        this.influenceMarkers = influenceMarkers;
+        this.actionMarkers = actionMarkers;
         this.unitLevelOne = unitLevelOne;
-    }
-
-    public void setUnitLevelTwo(int unitLevelTwo) {
         this.unitLevelTwo = unitLevelTwo;
-    }
-
-    public void setUnitLevelThree(int unitLevelThree) {
         this.unitLevelThree = unitLevelThree;
-    }
-
-    public void setGold(int gold) {
         this.gold = gold;
-    }
-
-    public void setPopulation(int population) {
         this.population = population;
-    }
-
-    public void setManaLevelZero(int manaLevelZero) {
         this.manaLevelZero = manaLevelZero;
-    }
-
-    public void setManaLevelOne(int manaLevelOne) {
-        this.manaLevelOne = manaLevelOne;
-    }
-
-    public void setManaLevelTwo(int manaLevelTwo) {
-        this.manaLevelTwo = manaLevelTwo;
-    }
-
-    public void setManaLevelThree(int manaLevelThree) {
-        this.manaLevelThree = manaLevelThree;
-    }
-
-    public void setVukoTokens(int vukoTokens) {
-        this.vukoTokens = vukoTokens;
     }
 }

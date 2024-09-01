@@ -22,8 +22,16 @@ public class ActionMarker {
     @ManyToOne
     @JoinColumn(name = "ACTION_FIELD_ID")
     private ActionField actionField;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "VIPER_GORGE_ID")
     private ViperGorge viperGorge;
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "HERO_CARD_ID")
+    private HeroCard heroCard;
 
+    public ActionMarker(Color color) {
+        this.color = color;
+    }
 }

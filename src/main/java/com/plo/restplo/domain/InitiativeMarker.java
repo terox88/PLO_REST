@@ -1,17 +1,27 @@
 package com.plo.restplo.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
-@RequiredArgsConstructor
 @Getter
+@NoArgsConstructor
+@EqualsAndHashCode
+@Entity
 public class InitiativeMarker {
-    public final static int limit = 1;
-    private final Color color;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", unique = true)
+    private long id;
+
+    private Color color;
+    @Setter
     private boolean twoMovesFlag;
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "ROUND_ID")
+    private Round round;
 
-
-    public void setTwoMovesFlag(boolean twoMovesFlag) {
-        this.twoMovesFlag = twoMovesFlag;
+    public InitiativeMarker(Color color) {
+        this.color = color;
     }
 }

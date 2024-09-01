@@ -33,10 +33,24 @@ public class Board {
             fetch = FetchType.LAZY
     )
     private  List<Land> lands;
+    @OneToMany(
+            targetEntity = HeroCard.class,
+            mappedBy = "board",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private  List<HeroCard> heroCards;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "INITIATIVE_TRAC_ID")
     private  InitiativeTrack initiativeTrack;
     private int deadSnowTrack;
     private  int deadSnowLimit;
+    @OneToMany(
+            targetEntity = InfluenceMarker.class,
+            mappedBy = "board",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private  List<InfluenceMarker> iceGarden;
 
     public Board(ViperGorge viperGorge, List<ActionField> actionFields, List<Land> lands, List<HeroCard> heroCards, InitiativeTrack initiativeTrack, int deadSnowTrack, int deadSnowLimit) {
