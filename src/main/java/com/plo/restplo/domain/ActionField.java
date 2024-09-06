@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayDeque;
@@ -32,9 +33,9 @@ public class ActionField {
     @JoinColumn(name = "BOARD_ID")
     private  Board board;
 
-    public ActionField(ActionFieldType actionFieldType, int maxTrackSize, Board board) {
+    public ActionField(ActionFieldType actionFieldType, int maxTrackSize) {
         this.actionFieldType = actionFieldType;
         this.maxTrackSize = maxTrackSize;
-        this.board = board;
+
     }
 }

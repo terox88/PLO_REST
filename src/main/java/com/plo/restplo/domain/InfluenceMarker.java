@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @EqualsAndHashCode
@@ -16,20 +17,21 @@ public class InfluenceMarker  {
     private long id;
     private  Color color;
     public final static int limit = 20;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "HERO_CARD_ID")
     private HeroCard heroCard;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
     private Board board;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "LAND_ID")
     private Land land;
 
-    public InfluenceMarker(Color color, HeroCard heroCard, Board board, Land land) {
+    public InfluenceMarker(Color color, HeroCard heroCard) {
         this.color = color;
         this.heroCard = heroCard;
-        this.board = board;
-        this.land = land;
     }
 }

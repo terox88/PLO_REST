@@ -17,11 +17,11 @@ public class Game {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "BOARD_ID")
     private  Board board;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "JOIN_GAME_PLAYER",
-            joinColumns = {@JoinColumn(name = "GAME_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")}
+    @OneToMany(
+            targetEntity = Player.class,
+            mappedBy = "game",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     private List<Player> players;
     @Setter

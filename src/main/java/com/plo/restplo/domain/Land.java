@@ -56,11 +56,10 @@ public class Land {
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
-    public Land(int number, int[] neighbors, LandToken landToken, int neutralMarkerQount, Board board) {
+    public Land(int number, int[] neighbors, int neutralMarkerQount) {
         this.number = number;
         this.neighbors = neighbors;
-        this.landToken = landToken;
         this.neutralMarkerQount = neutralMarkerQount;
-        this.board = board;
+
     }
 }
