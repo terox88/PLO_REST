@@ -19,6 +19,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private long id;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "GAME_ID")
     private Game game;
@@ -33,8 +34,7 @@ public class Player {
     @Setter
     private boolean hasFinishedGoal;
 
-    public Player(Game game, String name, Hero hero) {
-        this.game = game;
+    public Player(String name, Hero hero) {
         this.name = name;
         this.hero = hero;
     }

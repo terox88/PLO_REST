@@ -17,7 +17,7 @@ public class Stage {
     @Column(name = "ID", unique = true)
     private long id;
     private int numberOfRounds;
-    private int order;
+    private int stageNumber;
     @OneToMany(
             targetEntity = Round.class,
             mappedBy = "stage",
@@ -25,6 +25,7 @@ public class Stage {
             fetch = FetchType.LAZY
     )
     private List<Round> rounds = new ArrayList<>();
+    @Setter
     @ManyToOne
     @JoinColumn(name = "INITIATIVE_TRACK_ID")
     private InitiativeTrack initiativeTrack;
@@ -33,6 +34,8 @@ public class Stage {
     @JoinColumn(name = "VUKO_PLATE_ID")
     private VukoPlate vukoPlate;
 
-
-
+    public Stage(int stageNumber, int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
+        this.stageNumber = stageNumber;
+    }
 }

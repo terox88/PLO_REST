@@ -30,8 +30,8 @@ public class InfluenceMarker  {
     @JoinColumn(name = "LAND_ID")
     private Land land;
 
-    public InfluenceMarker(Color color, HeroCard heroCard) {
+    public InfluenceMarker(Color color) {
         this.color = color;
-        this.heroCard = heroCard;
+
     }
 }

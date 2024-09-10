@@ -7,6 +7,17 @@ import java.util.*;
 
 @Component
 public final class BoardFactory {
+    public Board boardFactory(List<Player> players) {
+
+        if (players.size() < 3) {
+            return new Board(new ViperGorge(),actionFieldsCreator(players.size()),landsCreator(),heroCardsCreator(players),new InitiativeTrack(stagesCreator()),0,18);
+        } else if (players.size() == 3) {
+            return new Board(new ViperGorge(),actionFieldsCreator(players.size()),landsCreator(),heroCardsCreator(players),new InitiativeTrack(stagesCreator()),0,24);
+        } else {
+            return new Board(new ViperGorge(),actionFieldsCreator(players.size()),landsCreator(),heroCardsCreator(players),new InitiativeTrack(stagesCreator()),0,30);
+        }
+
+    }
     private ViperGorge viperGorgeCreator() {
         return new ViperGorge();
     }
@@ -45,11 +56,12 @@ public final class BoardFactory {
         List<HeroCard> heroCards = new ArrayList<>();
         for (Player player : players) {
 
-            heroCards.add(new HeroCard())
+            heroCards.add(new HeroCard(player,player.getHero(),abilitiesCreator(player.getHero()), influenceMarkersCreator(player.getHero()),actionMarkersCreator(player.getHero()),3,2,1,2,4,1));
 
         }
+        return heroCards;
     }
-    private Queue<InfluenceMarker> influenceMarkersCreator(Hero hero, HeroCard heroCard) {
+    private Queue<InfluenceMarker> influenceMarkersCreator(Hero hero) {
         Queue<InfluenceMarker> influenceMarkers = new ArrayDeque<>();
         Color color = switch (hero) {
             case OLAF -> Color.BLUE;
@@ -58,9 +70,23 @@ public final class BoardFactory {
             case PASSIONARIA -> Color.GREEN;
         };
         for (int i = 0; i < InfluenceMarker.limit; i++) {
-            influenceMarkers.add(new InfluenceMarker(color, heroCard));
+            influenceMarkers.add(new InfluenceMarker(color));
         }
         return influenceMarkers;
+    }
+
+    private Queue<ActionMarker> actionMarkersCreator(Hero hero) {
+        Queue<ActionMarker> actionMarkers = new ArrayDeque<>();
+        Color color = switch (hero) {
+            case OLAF -> Color.BLUE;
+            case ULRIKE -> Color.RED;
+            case PIER -> Color.BLACK;
+            case PASSIONARIA -> Color.GREEN;
+        };
+        for (int i = 0; i < ActionMarker.limit; i++) {
+            actionMarkers.add(new ActionMarker(color));
+        }
+        return actionMarkers;
     }
 
     private Abilities abilitiesCreator(Hero hero) {
@@ -84,4 +110,46 @@ public final class BoardFactory {
 
     }
 
+    private Round roundsCreator (int stageNumber, int order, Stage stage) {
+        switch (order) {
+            case 1: {
+                if (stageNumber == 1){
+                    return new Round(order,false,3,stage);
+                }else if (stageNumber == 2) {
+                    return new Round(order,true,3,stage);
+                } else  {
+                    return new Round(order,true,4,stage);
+                }
+            }
+            case 2: {
+                if (stageNumber < 3) {
+                    return new Round(order,false,4,stage);
+                } else if (stageNumber == 3) {
+                    return new Round(order,false,5,stage);
+                } else if (stageNumber == 4) {
+                    return new Round(order,true,5,stage);
+                }
+
+            }
+            case 3:
+                return new Round(order,false,5,stage);
+
+            default: return null;
+        }
+    }
+
+    private List<Stage> stagesCreator () {
+        List<Stage> stages = new ArrayList<>();
+        stages.add(new Stage(1,3));
+        stages.add(new Stage(2,3));
+        stages.add(new Stage(3,2));
+        stages.add(new Stage(4,2));
+
+        for (Stage stage : stages) {
+            for (int i = 1; i < stage.getNumberOfRounds()+1; i++) {
+                stage.getRounds().add(roundsCreator(stage.getStageNumber(), i, stage));
+            }
+        }
+        return stages;
+    }
 }
