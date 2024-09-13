@@ -24,6 +24,13 @@ public class Game {
             fetch = FetchType.LAZY
     )
     private List<Player> players;
+    @OneToMany(
+            targetEntity = LandToken.class,
+            mappedBy = "game",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<LandToken> landTokens;
     @Setter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ACTIVE_PLAYER_ID")
@@ -36,8 +43,9 @@ public class Game {
     private Player winner;
 
 
-    public Game(Board board, List<Player> players) {
+    public Game(Board board, List<Player> players, List<LandToken> landTokens) {
         this.board = board;
         this.players = players;
+        this.landTokens = landTokens;
     }
 }

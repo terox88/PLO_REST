@@ -1,13 +1,14 @@
 package com.plo.restplo.domain;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
+@NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@DynamicUpdate
 public class LandToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,23 +16,27 @@ public class LandToken {
     private long id;
     private int order;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FIRST_PRIZE_ID")
-    private Prize firstPrize;
+    @JoinColumn(name = "MANA_PRIZE_ID")
+    private Prize manaPrize;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "SECOND_PRIZE_ID")
-    private Prize secondPrize;
+    @JoinColumn(name = "GOLD_PRIZE_ID")
+    private Prize goldPrize;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "THIRD_PRIZE_ID")
-    private Prize thirdPrize;
+    @JoinColumn(name = "POPULATION_PRIZE_ID")
+    private Prize populationPrize;
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "GAME_ID")
+    private Game game;
     private int winnerPoints;
     private int secondPlacePoints;
     private int thirdPlacePoints;
 
-    public LandToken(int order, Prize firstPrize, Prize secondPrize, Prize thirdPrize, int winnerPoints, int secondPlacePoints, int thirdPlacePoints) {
+    public LandToken(int order, Prize manaPrize, Prize goldPrize, Prize populationPrize, int winnerPoints, int secondPlacePoints, int thirdPlacePoints) {
         this.order = order;
-        this.firstPrize = firstPrize;
-        this.secondPrize = secondPrize;
-        this.thirdPrize = thirdPrize;
+        this.manaPrize = manaPrize;
+        this.goldPrize = goldPrize;
+        this.populationPrize = populationPrize;
         this.winnerPoints = winnerPoints;
         this.secondPlacePoints = secondPlacePoints;
         this.thirdPlacePoints = thirdPlacePoints;

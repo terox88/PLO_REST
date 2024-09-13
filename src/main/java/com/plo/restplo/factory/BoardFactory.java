@@ -18,10 +18,8 @@ public final class BoardFactory {
         }
 
     }
-    private ViperGorge viperGorgeCreator() {
-        return new ViperGorge();
-    }
-    private List<ActionField> actionFieldsCreator(final int players) {
+
+    public List<ActionField> actionFieldsCreator(final int players) {
         List<ActionField> actionFields = new ArrayList<>();
         actionFields.add(new ActionField(ActionFieldType.INFLUENCES, 8));
         actionFields.add(new ActionField(ActionFieldType.MOVE, players == 2 ? 3 : 4));
@@ -31,7 +29,7 @@ public final class BoardFactory {
         return actionFields;
 
     }
-    private int [] neighboursCreator(int number) {
+    public int [] neighboursCreator(int number) {
        return switch (number) {
             case 1 -> new int [] {2, 4, 5};
             case 2 -> new int[] {1, 3, 5, 6};
@@ -45,14 +43,14 @@ public final class BoardFactory {
         };
     }
 
-    private List<Land> landsCreator() {
+    public List<Land> landsCreator() {
         List<Land> lands = new ArrayList<>();
         for (int i = 1; i < 9; i++) {
             lands.add(new Land(i,neighboursCreator(i), 1));
         }
         return lands;
     }
-    private List<HeroCard> heroCardsCreator (List<Player> players) {
+    public List<HeroCard> heroCardsCreator (List<Player> players) {
         List<HeroCard> heroCards = new ArrayList<>();
         for (Player player : players) {
 
@@ -61,7 +59,7 @@ public final class BoardFactory {
         }
         return heroCards;
     }
-    private Queue<InfluenceMarker> influenceMarkersCreator(Hero hero) {
+    public Queue<InfluenceMarker> influenceMarkersCreator(Hero hero) {
         Queue<InfluenceMarker> influenceMarkers = new ArrayDeque<>();
         Color color = switch (hero) {
             case OLAF -> Color.BLUE;
@@ -75,7 +73,7 @@ public final class BoardFactory {
         return influenceMarkers;
     }
 
-    private Queue<ActionMarker> actionMarkersCreator(Hero hero) {
+    public Queue<ActionMarker> actionMarkersCreator(Hero hero) {
         Queue<ActionMarker> actionMarkers = new ArrayDeque<>();
         Color color = switch (hero) {
             case OLAF -> Color.BLUE;
@@ -89,7 +87,7 @@ public final class BoardFactory {
         return actionMarkers;
     }
 
-    private Abilities abilitiesCreator(Hero hero) {
+    public Abilities abilitiesCreator(Hero hero) {
         List<AbilitiesType> levOne = switch (hero) {
             case OLAF, PASSIONARIA, ULRIKE -> new ArrayList<>(List.of(AbilitiesType.ATTACK));
             case PIER -> new ArrayList<>(List.of(AbilitiesType.ATTACK, AbilitiesType.ATTACK));
@@ -110,7 +108,7 @@ public final class BoardFactory {
 
     }
 
-    private Round roundsCreator (int stageNumber, int order, Stage stage) {
+    public Round roundsCreator (int stageNumber, int order, Stage stage) {
         switch (order) {
             case 1: {
                 if (stageNumber == 1){
@@ -138,7 +136,7 @@ public final class BoardFactory {
         }
     }
 
-    private List<Stage> stagesCreator () {
+    public List<Stage> stagesCreator () {
         List<Stage> stages = new ArrayList<>();
         stages.add(new Stage(1,3));
         stages.add(new Stage(2,3));

@@ -16,13 +16,11 @@ public class Prize {
     @Column(name = "ID", unique = true)
     private long id;
 
-    private PrizeToken prizeType;
     private int quantity;
     @Setter
     private boolean wasTaken;
 
-    public Prize(PrizeToken prizeType, int quantity) {
-        this.prizeType = prizeType;
+    public Prize(int quantity) {
         this.quantity = quantity;
     }
 }
