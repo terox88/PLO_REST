@@ -38,6 +38,10 @@ public class HeroCard {
     )
     private  Queue<ActionMarker> actionMarkers;
     @Setter
+    @ManyToOne
+    @JoinColumn(name = "BOARD_ID")
+    private Board board;
+    @Setter
     private int unitLevelOne;
     @Setter
     private int unitLevelTwo;

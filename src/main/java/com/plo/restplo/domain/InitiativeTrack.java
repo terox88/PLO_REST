@@ -19,7 +19,7 @@ public class InitiativeTrack {
     @Column(name = "ID", unique = true)
     private long id;
     @OneToMany(
-            targetEntity = InitiativeTrack.class,
+            targetEntity = Stage.class,
             mappedBy = "initiativeTrack",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
