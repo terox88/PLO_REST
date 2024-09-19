@@ -59,8 +59,8 @@ public final class BoardFactory {
         }
         return heroCards;
     }
-    public Queue<InfluenceMarker> influenceMarkersCreator(Hero hero) {
-        Queue<InfluenceMarker> influenceMarkers = new ArrayDeque<>();
+    public List<InfluenceMarker> influenceMarkersCreator(Hero hero) {
+        List<InfluenceMarker> influenceMarkers = new ArrayList<>();
         Color color = switch (hero) {
             case OLAF -> Color.BLUE;
             case ULRIKE -> Color.RED;
@@ -73,8 +73,8 @@ public final class BoardFactory {
         return influenceMarkers;
     }
 
-    public Queue<ActionMarker> actionMarkersCreator(Hero hero) {
-        Queue<ActionMarker> actionMarkers = new ArrayDeque<>();
+    public List<ActionMarker> actionMarkersCreator(Hero hero) {
+        List<ActionMarker> actionMarkers = new ArrayList<>();
         Color color = switch (hero) {
             case OLAF -> Color.BLUE;
             case ULRIKE -> Color.RED;

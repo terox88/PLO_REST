@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.Queue;
+import java.util.List;
+
 
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Setter
 @DynamicUpdate
 public class HeroCard {
     @Id
@@ -29,41 +31,31 @@ public class HeroCard {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private  Queue<InfluenceMarker> influenceMarkers;
+    private  List<InfluenceMarker> influenceMarkers;
     @OneToMany(
             targetEntity = ActionMarker.class,
             mappedBy = "heroCard",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private  Queue<ActionMarker> actionMarkers;
-    @Setter
+    private List<ActionMarker> actionMarkers;
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
     private Board board;
-    @Setter
     private int unitLevelOne;
-    @Setter
     private int unitLevelTwo;
-    @Setter
     private int unitLevelThree;
-    @Setter
     private int gold;
-    @Setter
     private int population;
-    @Setter
     private int manaLevelZero;
-    @Setter
     private int manaLevelOne;
-    @Setter
     private int manaLevelTwo;
-    @Setter
     private int manaLevelThree;
-    @Setter
+
     private int vukoTokens;
 
 
-    public HeroCard(Player player, Hero hero, Abilities unitsAbilities, Queue<InfluenceMarker> influenceMarkers, Queue<ActionMarker> actionMarkers, int unitLevelOne, int unitLevelTwo, int unitLevelThree, int gold, int population, int manaLevelZero) {
+    public HeroCard(Player player, Hero hero, Abilities unitsAbilities, List<InfluenceMarker> influenceMarkers, List<ActionMarker> actionMarkers, int unitLevelOne, int unitLevelTwo, int unitLevelThree, int gold, int population, int manaLevelZero) {
         this.player = player;
         this.hero = hero;
         this.unitsAbilities = unitsAbilities;

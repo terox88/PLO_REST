@@ -2,6 +2,7 @@ package com.plo.restplo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 
 import java.util.List;
@@ -14,16 +15,10 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private long id;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOARD_ID")
     private  Board board;
-    @OneToMany(
-            targetEntity = Player.class,
-            mappedBy = "game",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Player> players;
+
     @OneToMany(
             targetEntity = LandToken.class,
             mappedBy = "game",
@@ -32,20 +27,19 @@ public class Game {
     )
     private List<LandToken> landTokens;
     @Setter
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ACTIVE_PLAYER_ID")
     private Player activePlayer;
     @Setter
     private boolean isEnded;
     @Setter
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "WINNER_PLAYER_ID")
     private Player winner;
 
 
-    public Game(Board board, List<Player> players, List<LandToken> landTokens) {
+    public Game(Board board,  List<LandToken> landTokens) {
         this.board = board;
-        this.players = players;
         this.landTokens = landTokens;
     }
 }

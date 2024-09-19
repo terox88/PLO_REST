@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,11 +61,11 @@ public class GameFactoryTest {
        List<LandToken> result = gameFactory.landTokenCreator(2);
 
        //Then
-       Assertions.assertEquals(1, result.get(0).getOrder());
+       Assertions.assertEquals(1, result.get(0).getOrderNumber());
        Assertions.assertEquals(0, result.get(0).getManaPrize().getQuantity());
        Assertions.assertEquals(1, result.get(0).getGoldPrize().getQuantity());
        Assertions.assertEquals(1, result.get(0).getPopulationPrize().getQuantity());
-       Assertions.assertEquals(5, result.get(4).getOrder());
+       Assertions.assertEquals(5, result.get(4).getOrderNumber());
        Assertions.assertEquals(0, result.get(4).getManaPrize().getQuantity());
        Assertions.assertEquals(2, result.get(4).getGoldPrize().getQuantity());
        Assertions.assertEquals(1, result.get(4).getPopulationPrize().getQuantity());
@@ -93,13 +93,13 @@ public class GameFactoryTest {
         Land land1 = new Land(1, new int[]{2, 3}, 2);
 
         // HeroCards
-        HeroCard heroCard1 = new HeroCard(player1, Hero.PASSIONARIA, new Abilities(), new ArrayDeque<>(), new ArrayDeque<>(), 1, 2, 3, 100, 50, 0);
-        HeroCard heroCard2 = new HeroCard(player2, Hero.OLAF, new Abilities(), new ArrayDeque<>(), new ArrayDeque<>(), 1, 2, 3, 100, 50, 0);
+        HeroCard heroCard1 = new HeroCard(player1, Hero.PASSIONARIA, new Abilities(), new ArrayList<>(), new ArrayList<>(), 1, 2, 3, 100, 50, 0);
+        HeroCard heroCard2 = new HeroCard(player2, Hero.OLAF, new Abilities(), new ArrayList<>(), new ArrayList<>(), 1, 2, 3, 100, 50, 0);
 
         // InitiativeTrack
         InitiativeTrack initiativeTrack = new InitiativeTrack();
 
-        // Tworzymy obiekt Board dla dwóch graczy
+
         List<ActionField> actionFields = Arrays.asList(actionField1, actionField2);
         List<Land> lands = Arrays.asList(land1);
         List<HeroCard> heroCards = Arrays.asList(heroCard1, heroCard2);
@@ -110,7 +110,6 @@ public class GameFactoryTest {
         // When
         Game result = gameFactory.gameFactory(List.of(player1, player2));
         //Then
-        Assertions.assertEquals(2, result.getPlayers().size());
         Assertions.assertEquals(6, result.getLandTokens().size());
 
     }

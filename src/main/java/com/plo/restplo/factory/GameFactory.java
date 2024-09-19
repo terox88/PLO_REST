@@ -13,7 +13,7 @@ public class GameFactory {
     private final BoardFactory boardFactory;
 
     public Game gameFactory(List<Player> players){
-        return new Game(boardFactory.boardFactory(players), players, landTokenCreator(players.size()));
+        return new Game(boardFactory.boardFactory(players), landTokenCreator(players.size()));
     }
 
     public List<LandToken> landTokenCreator(int numberOfPlayers) {

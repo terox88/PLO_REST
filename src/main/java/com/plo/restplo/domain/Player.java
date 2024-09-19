@@ -5,24 +5,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
-@DynamicUpdate
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private long id;
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "GAME_ID")
-    private Game game;
     private String name;
     private Hero hero;
     @Setter

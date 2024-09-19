@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @NoArgsConstructor
@@ -27,8 +28,9 @@ public class ActionField {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private  Queue<ActionMarker> actionMarkers = new ArrayDeque<>();
+    private List<ActionMarker> actionMarkers = new ArrayList<>();
     private  int maxTrackSize;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
     private  Board board;

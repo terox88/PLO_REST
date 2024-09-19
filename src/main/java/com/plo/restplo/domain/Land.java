@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -30,7 +29,7 @@ public class Land {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private Queue<Uroczysko> uroczyska = new ArrayDeque<>();
+    private List<Uroczysko> uroczyska = new ArrayList<>();
     private int neutralMarkerQount;
     @OneToMany(
             targetEntity = InfluenceMarker.class,
