@@ -25,5 +25,4 @@ public class SpecialUnit {
     @JoinColumn(name = "LAND_ID")
     private Land land;
 
-
 }
