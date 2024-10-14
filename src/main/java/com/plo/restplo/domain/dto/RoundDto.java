@@ -12,5 +12,5 @@ public class RoundDto {
     private List<InitiativeMarkerDto> markers;
     private boolean isScoring;
     private int actionMarkersQuantity;
-    private StageDto stageDto;
+    private int stageNumber;
 }

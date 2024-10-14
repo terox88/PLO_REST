@@ -9,5 +9,5 @@ public class UroczyskoDto {
     private long id;
     private boolean isReal;
     private boolean isFliped;
-    private LandDto landDto;
+    private int landNumber;
 }

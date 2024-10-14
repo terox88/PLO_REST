@@ -10,5 +10,6 @@ public class InitiativeMarkerDto {
     private long id;
     private Color color;
     private boolean twoMovesFlag;
-    private RoundDto roundDto;
+    private int stageNumber;
+    private int roundNumber;
 }

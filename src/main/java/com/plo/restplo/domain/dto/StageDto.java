@@ -11,6 +11,5 @@ public class StageDto {
     private int numberOfRounds;
     private int stageNumber;
     private List<RoundDto> rounds;
-    private InitiativeTrackDto initiativeTrackDto;
     private VukoPlateDto vukoPlateDto;
 }

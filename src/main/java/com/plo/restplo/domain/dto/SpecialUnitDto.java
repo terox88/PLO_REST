@@ -12,5 +12,5 @@ public class SpecialUnitDto {
     private Color color;
     private int level;
     private boolean isKilled;
-    private LandDto landDto;
+    private int landNumber;
 }
