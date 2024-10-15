@@ -52,14 +52,14 @@ public class BoardMapper {
     public List<InfluenceMarkerDto> mapToInfluenceMarekerDtoList(List<InfluenceMarker> influenceMarkers) {
         List<InfluenceMarkerDto> influenceMarkerDtos = new ArrayList<>();
         for (InfluenceMarker influenceMarker : influenceMarkers) {
-            influenceMarkerDtos.add(new InfluenceMarkerDto(influenceMarker.getId(), influenceMarker.getColor(),influenceMarker.getBoard().getId()));
+            influenceMarkerDtos.add(new InfluenceMarkerDto(influenceMarker.getId(), influenceMarker.getColor(),influenceMarker.getBoard() == null ? -1 : influenceMarker.getBoard().getId()));
         }
         return influenceMarkerDtos;
     }
 
     public LandTokenDto mapToLandTokenDto(LandToken landToken) {
         return new LandTokenDto(landToken.getId(), landToken.getOrderNumber(),mapToPrizeDto(landToken.getManaPrize()),
-                mapToPrizeDto(landToken.getGoldPrize()), mapToPrizeDto(landToken.getPopulationPrize()),landToken.getGame().getId(),
+                mapToPrizeDto(landToken.getGoldPrize()), mapToPrizeDto(landToken.getPopulationPrize()),landToken.getGame() == null ? -1 : landToken.getGame().getId(),
                 landToken.getWinnerPoints(), landToken.getSecondPlacePoints(), landToken.getThirdPlacePoints());
     }
      public PrizeDto mapToPrizeDto(Prize prize) {
@@ -88,7 +88,7 @@ public class BoardMapper {
     }
     public HeroCardDto mapToHeroCardDto( HeroCard heroCard) {
         return new HeroCardDto(heroCard.getId(), mapToPlayerDto(heroCard.getPlayer()), heroCard.getHero(), mapToAbilitiesDto(heroCard.getUnitsAbilities()), mapToInfluenceMarekerDtoList(heroCard.getInfluenceMarkers()),
-                mapToActionMarkerDtoList(heroCard.getActionMarkers()), heroCard.getBoard().getId(), heroCard.getUnitLevelOne(), heroCard.getUnitLevelTwo(), heroCard.getUnitLevelThree(),
+                mapToActionMarkerDtoList(heroCard.getActionMarkers()), heroCard.getBoard() == null ? -1 : heroCard.getBoard().getId(), heroCard.getUnitLevelOne(), heroCard.getUnitLevelTwo(), heroCard.getUnitLevelThree(),
                 heroCard.getGold(), heroCard.getPopulation(), heroCard.getManaLevelZero(), heroCard.getManaLevelOne(), heroCard.getManaLevelTwo(), heroCard.getManaLevelThree(), heroCard.getVukoTokens());
     }
 
@@ -122,7 +122,7 @@ public class BoardMapper {
         return roundDtos;
      }
      public VukoPlateDto mapToVukoPlateDto(VukoPlate vukoPlate) {
-        return new VukoPlateDto(vukoPlate.getId(), vukoPlate.getVukoPlateType(), vukoPlate.isAllGame());
+        return vukoPlate == null ? null : new VukoPlateDto(vukoPlate.getId(), vukoPlate.getVukoPlateType(), vukoPlate.isAllGame());
 
      }
 

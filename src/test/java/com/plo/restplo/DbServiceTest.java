@@ -45,7 +45,7 @@ public class DbServiceTest {
         List<Land> lands = Arrays.asList(land1);
         List<HeroCard> heroCards = Arrays.asList(heroCard1, heroCard2);
 
-      board =  dbService.saveBoard(new Board(viperGorge, actionFields, lands, heroCards, initiativeTrack, 0, 10));
+      board = new Board(viperGorge, actionFields, lands, heroCards, initiativeTrack, 0, 10);
       Prize mana = new Prize(2);
       Prize gold = new Prize(1);
       Prize population = new Prize(1);
