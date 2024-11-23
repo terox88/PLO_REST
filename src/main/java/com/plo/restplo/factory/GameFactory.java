@@ -2,12 +2,12 @@ package com.plo.restplo.factory;
 
 import com.plo.restplo.domain.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class GameFactory {
     private final BoardFactory boardFactory;
