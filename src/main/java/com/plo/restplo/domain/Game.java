@@ -30,6 +30,8 @@ public class Game {
     @JoinColumn(name = "ACTIVE_PLAYER_ID")
     private Player activePlayer;
     @Setter
+    private List<Hero> currentPlayersOrder;
+    @Setter
     private boolean isEnded;
     @Setter
     @OneToOne(fetch = FetchType.EAGER)

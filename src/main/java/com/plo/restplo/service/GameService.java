@@ -38,14 +38,16 @@ public class GameService {
         }
     }
 
-    public Game setPlayersOrder(Game game, List<Hero> order) {
+    public Game playersOrderSetting(Game game, List<Hero> order) {
         game.getBoard().getInitiativeTrack().getStages().get(0).getRounds().get(0).getMarkers().clear();
-        for (int i = order.size(); i > 0; i--) {
-            game.getBoard().getInitiativeTrack().getStages().get(0).getRounds().get(0).getMarkers().addFirst(new InitiativeMarker(order.get(i-1).getColor()));
+        for (int i = 0; i < order.size(); i++) {
+            InitiativeMarker marker = new InitiativeMarker(order.get(i).getColor());
+            marker.setRound(game.getBoard().getInitiativeTrack().getStages().get(0).getRounds().get(0));
+            game.getBoard().getInitiativeTrack().getStages().get(0).getRounds().get(0).getMarkers().addFirst(marker);
         }
         return game;
     }
-    public Game setRandomPlayersOrder(Game game) {
+    public Game randomPlayersOrderSetting(Game game) {
         List<Hero> heroes = new ArrayList<>(game.getBoard().getHeroCards().stream().map(HeroCard::getHero).toList());
         List<Hero> order =new ArrayList<>();
 
@@ -55,6 +57,42 @@ public class GameService {
             heroes.remove(index);
         }
 
-        return setPlayersOrder(game, order);
+        return playersOrderSetting(game, order);
     }
+    public Hero colorToHeroConversion (Color color) {
+        return switch (color){
+            case RED -> Hero.ULRIKE;
+            case BLUE -> Hero.OLAF;
+            case BLACK -> Hero.PIER;
+            case GREEN -> Hero.PASSIONARIA;
+        };
+    }
+
+    public List<Hero> getInitiativeOrder(InitiativeTrack initiativeTrack) {
+        List<Hero> order = new ArrayList<>();
+        for (int s = initiativeTrack.getStages().size(); s > 0; s--) {
+            Stage stage = initiativeTrack.getStages().get(s);
+            for (Round round : stage.getRounds()) {
+                if(!round.getMarkers().isEmpty()) {
+                    List<InitiativeMarker> markers = round.getMarkers();
+                    while(!markers.isEmpty()) {
+                        order.add(colorToHeroConversion(markers.getLast().getColor()));
+                        markers.removeLast();
+                    }
+                }
+            }
+
+        }
+        return order;
+    }
+
+    public Player heroToPlayerConversion(List<HeroCard> cards, Hero hero) {
+        for (HeroCard heroCard : cards) {
+            if (heroCard.getHero() == hero) {
+                return heroCard.getPlayer();
+            }
+        }
+        return new Player();
+    }
+
 }
