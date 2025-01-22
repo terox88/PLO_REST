@@ -1,6 +1,7 @@
 package com.plo.restplo.domain.dto;
 
 import com.plo.restplo.domain.Board;
+import com.plo.restplo.domain.Hero;
 import com.plo.restplo.domain.LandToken;
 import com.plo.restplo.domain.Player;
 import jakarta.persistence.*;
@@ -21,4 +22,5 @@ public class GameDto {
     private boolean isEnded;
 
     private PlayerDto winner;
+    private List<Hero> currentPlayersOrder;
 }

@@ -16,7 +16,7 @@ public class GameMapper {
     private final BoardMapper boardMapper;
 
     public GameDto mapToGameDto(Game game) {
-        return new GameDto(game.getId(), boardMapper.mapToBoardDto(game.getBoard()), mapToLandTokenDtoList(game.getLandTokens()), boardMapper.mapToPlayerDto(game.getActivePlayer()), game.isEnded(), boardMapper.mapToPlayerDto(game.getWinner()));
+        return new GameDto(game.getId(), boardMapper.mapToBoardDto(game.getBoard()), mapToLandTokenDtoList(game.getLandTokens()), boardMapper.mapToPlayerDto(game.getActivePlayer()), game.isEnded(), boardMapper.mapToPlayerDto(game.getWinner()), game.getCurrentPlayersOrder() == null ? new ArrayList<>() : game.getCurrentPlayersOrder());
     }
 
     public List<LandTokenDto> mapToLandTokenDtoList(List<LandToken> landTokens) {

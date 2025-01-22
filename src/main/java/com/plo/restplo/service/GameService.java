@@ -1,10 +1,9 @@
 package com.plo.restplo.service;
 
 import com.plo.restplo.domain.*;
-import com.plo.restplo.exception.NotEnoughPlayerException;
-import com.plo.restplo.exception.NotUniqueHerosException;
-import com.plo.restplo.exception.NullElementException;
+import com.plo.restplo.exception.*;
 import com.plo.restplo.factory.GameFactory;
+import com.plo.restplo.validation.GameValidator;
 import com.plo.restplo.validation.PlayersValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,7 @@ public class GameService {
     private final GameFactory gameFactory;
     private final PlayersValidator playersValidator;
     private final Random random;
+    private final GameValidator gameValidator;
 
     public Game gameCreator(List<Player> players) throws NullElementException, NotEnoughPlayerException, NotUniqueHerosException{
         if(playersValidator.isNotNull(players) && playersValidator.isHaveUniqeHeros(players)
@@ -71,7 +71,7 @@ public class GameService {
     public List<Hero> getInitiativeOrder(InitiativeTrack initiativeTrack) {
         List<Hero> order = new ArrayList<>();
         for (int s = initiativeTrack.getStages().size(); s > 0; s--) {
-            Stage stage = initiativeTrack.getStages().get(s);
+            Stage stage = initiativeTrack.getStages().get(s-1);
             for (Round round : stage.getRounds()) {
                 if(!round.getMarkers().isEmpty()) {
                     List<InitiativeMarker> markers = round.getMarkers();
@@ -94,5 +94,35 @@ public class GameService {
         }
         return new Player();
     }
+    public Game setActivePlayer(Game game) {
+        if(game.getCurrentPlayersOrder().isEmpty()) {
+          game.setCurrentPlayersOrder(getInitiativeOrder(game.getBoard().getInitiativeTrack()));
+        }
+        game.setActivePlayer(heroToPlayerConversion(game.getBoard().getHeroCards(), game.getCurrentPlayersOrder().getFirst()));
+        game.getCurrentPlayersOrder().removeFirst();
+
+        return game;
+    }
+
+    public Game putLandToken(Game game, int landNumber) throws NoSuchLandException, PuttingDoneException {
+        if(landNumber > 8 || landNumber < 1) {
+            throw new NoSuchLandException();
+        } else if (game.getLandTokens().isEmpty()) {
+            throw new PuttingDoneException();
+
+        } else {
+            int index = random.nextInt(game.getLandTokens().size());
+            LandToken landToken = game.getLandTokens().get(index);
+            if(game.getBoard().getLands().get(landNumber-1).getLandToken() == null) {
+                game.getBoard().getLands().get(landNumber -1).setLandToken(landToken);
+                game.getLandTokens().remove(index);
+                game.getBoard().getLands().get(landNumber -1).setInGame(true);
+            }
+        }
+        return game;
+
+    }
+
+
 
 }
