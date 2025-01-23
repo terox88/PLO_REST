@@ -86,6 +86,7 @@ public class GameService {
         return order;
     }
 
+
     public Player heroToPlayerConversion(List<HeroCard> cards, Hero hero) {
         for (HeroCard heroCard : cards) {
             if (heroCard.getHero() == hero) {
@@ -94,7 +95,10 @@ public class GameService {
         }
         return new Player();
     }
-    public Game setActivePlayer(Game game) {
+    public Player getActivePlayer(Game game) {
+        return game.getActivePlayer();
+    }
+    public Game setActivePlayerByInitiative(Game game) {
         if(game.getCurrentPlayersOrder().isEmpty()) {
           game.setCurrentPlayersOrder(getInitiativeOrder(game.getBoard().getInitiativeTrack()));
         }
@@ -103,6 +107,16 @@ public class GameService {
 
         return game;
     }
+    public Game setActivePlayerByActionField(Game game, List<ActionMarker> actionMarkers) throws EmptyFieldException{
+        if (actionMarkers.isEmpty()){
+            throw new EmptyFieldException();
+        }else {
+            game.setActivePlayer(heroToPlayerConversion(game.getBoard().getHeroCards(), colorToHeroConversion(actionMarkers.getLast().getColor())));
+        }
+        return game;
+    }
+
+
 
     public Game putLandToken(Game game, int landNumber) throws NoSuchLandException, PuttingDoneException {
         if(landNumber > 8 || landNumber < 1) {

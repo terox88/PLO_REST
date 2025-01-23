@@ -60,7 +60,7 @@ public class InitiativeTrackTest {
         Game resultGame = gameService.playersOrderSetting(game, heroes);
 
         //Then
-        InitiativeMarker firstMarker = game.getBoard().getInitiativeTrack().getStages().getFirst().getRounds().getFirst().getMarkers().getLast();
+        InitiativeMarker firstMarker = resultGame.getBoard().getInitiativeTrack().getStages().getFirst().getRounds().getFirst().getMarkers().getLast();
         Assertions.assertEquals(Color.GREEN, firstMarker.getColor());
     }
 

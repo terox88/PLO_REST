@@ -20,6 +20,7 @@ public class GameDto {
     private PlayerDto activePlayer;
 
     private boolean isEnded;
+    private boolean isPrepDone;
 
     private PlayerDto winner;
     private List<Hero> currentPlayersOrder;

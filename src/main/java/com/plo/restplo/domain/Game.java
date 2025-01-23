@@ -34,6 +34,8 @@ public class Game {
     @Setter
     private boolean isEnded;
     @Setter
+    private boolean isPrepDone;
+    @Setter
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "WINNER_PLAYER_ID")
     private Player winner;
