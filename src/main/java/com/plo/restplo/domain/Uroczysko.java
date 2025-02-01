@@ -16,7 +16,6 @@ public class Uroczysko {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private long id;
-    private boolean isReal;
     private boolean isFliped;
     @ManyToOne
     @JoinColumn(name = "LAND_ID")

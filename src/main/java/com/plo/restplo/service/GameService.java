@@ -137,6 +137,54 @@ public class GameService {
 
     }
 
+    public Board firstPutInfluence(Board board, int landNumber, InfluenceMarker influenceMarker) throws OneLandOneColorException {
+        Land land = board.getLands().get(landNumber -1);
+        if (gameValidator.firstInfluenceOnlyOneCheck(land, influenceMarker)){
+            influenceMarker.setHeroCard(null);
+            land.getInfluenceMarkers().add(influenceMarker);
+            influenceMarker.setLand(land);
+
+            return board;
+        }else {
+            throw new OneLandOneColorException();
+        }
+
+    }
+
+    public Board putThorne(Board board, int landNumber) throws NoSuchLandException {
+        Land land = board.getLands().get(landNumber -1);
+        if(land.isInGame()) {
+            land.setHasThorn(true);
+            return board;
+        }else {
+            throw new NoSuchLandException();
+        }
+    }
+
+    public Board placeUroczyska(Board board) {
+
+        List<Land> landsInGame = new ArrayList<>();
+
+        for (Land land : board.getLands()) {
+            if (land.isInGame()) {
+                landsInGame.add(land);
+            }
+        }
+        List<Uroczysko> uroczyska = List.of(new Uroczysko(), new Uroczysko(), new Uroczysko(), new Uroczysko());
+
+        while (!uroczyska.isEmpty()) {
+            int index = random.nextInt(landsInGame.size());
+            if(!landsInGame.get(index).isHasThorn()){
+                Uroczysko uroczysko = uroczyska.getFirst();
+                uroczysko.setLand(landsInGame.get(index));
+                landsInGame.get(index).getUroczyska().add(uroczysko);
+                uroczyska.removeFirst();
+                landsInGame.remove(index);
+            }
+        }
+        return board;
+    }
+
 
 
 }

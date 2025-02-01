@@ -31,6 +31,8 @@ public class ActionField {
     private List<ActionMarker> actionMarkers = new ArrayList<>();
     private  int maxTrackSize;
     @Setter
+    private int gameOrder;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
     private  Board board;
